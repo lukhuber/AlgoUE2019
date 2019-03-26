@@ -13,17 +13,19 @@ def Main():
 
     matrix = [[0 for x in range(len(right))] for y in range(len(right))] 
 
-    fillFirstRow(matrix, right)
-    fillFirstCol(matrix, down)
+    fillMatrix(matrix, down, right)
 
-    for i, v in enumerate(matrix):
-        print(matrix[i])
+    print("Result: ", matrix[-1][-1])
 
-    print("Down")
-    print(len(down), "x", (len(down[0])))
-    print("Right")
-    print(len(right), "x", (len(right[0])))
+    # Uncomment this, when resulting matrix should be printed.
+    #for i, v in enumerate(matrix):
+    #    print(matrix[i])
 
+    # DEBUG
+    #print("Down")
+    #print(len(down), "x", (len(down[0])))
+    #print("Right")
+    #print(len(right), "x", (len(right[0])))
 
 def downValues():
     dValues = []
@@ -83,6 +85,17 @@ def fillFirstCol(matrix, down):
 
     for i in range(2, len(matrix)):
         matrix[i][0] = matrix[i-1][0] + down[i-1][0]
+
+def fillMatrix(matrix, down, right):
+    fillFirstRow(matrix, right)
+    fillFirstCol(matrix, down)
+
+    for row in range(1, len(matrix)):
+        for col in range(1, len(matrix[0])):
+            if (matrix[row - 1][col] + down[row - 1][col] >= matrix[row][col - 1] + right[row][col - 1]):
+                matrix[row][col] = round(matrix[row - 1][col] + down[row - 1][col], 2)
+            else:
+                matrix[row][col] = round(matrix[row][col - 1] + right[row][col - 1], 2)
 
 if __name__ == "__main__":
     Main()
