@@ -353,7 +353,7 @@ def printResult(seq1, seq2, clustal, matrix):
             print('              ', clustal[i*60-60:i*60])
             print("")
 
-    print("Score: ", matrix.score)
+    print("Score: ", matrix.score, file = sys.stderr)
 
 
 
